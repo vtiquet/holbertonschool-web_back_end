@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
 """mypy validation for zoom_array."""
-from typing import Tuple, List, Any
+from typing import Tuple, List
 
 
-def zoom_array(lst: Tuple[Any, ...], factor: int = 2) -> List[Any]:
+def zoom_array(lst: Tuple, factor: int = 2) -> List:
     """
     Zooms in on an array by repeating each element.
 
@@ -14,7 +14,7 @@ def zoom_array(lst: Tuple[Any, ...], factor: int = 2) -> List[Any]:
     Returns:
         A list containing the zoomed-in elements.
     """
-    zoomed_in: List[Any] = [
+    zoomed_in: List = [
         item for item in lst
         for i in range(factor)
     ]
