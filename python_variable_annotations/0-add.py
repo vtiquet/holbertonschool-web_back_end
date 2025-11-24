@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 """Type-annotated function add."""
 
+
 def add(a: float, b: float) -> float:
     """
     Adds two floating-point numbers.
@@ -13,4 +14,3 @@ def add(a: float, b: float) -> float:
         The sum of the two floats.
     """
     return a + b
-
