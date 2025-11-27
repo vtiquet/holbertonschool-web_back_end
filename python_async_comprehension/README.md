@@ -1,1 +1,1 @@
-Is not EMPTY
+Is not an empty README.md
