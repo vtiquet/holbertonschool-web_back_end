@@ -1,32 +1,39 @@
 #!/usr/bin/env python3
 """
-Run time for four parallel comprehensions
+measure_runtime module
+
+This module defines a coroutine that measures the total execution time
+of running an asynchronous comprehension coroutine four times in parallel.
 """
+
+
 import asyncio
 from time import time
 
-# Import the async_comprehension from the previous task
 async_comprehension = __import__('1-async_comprehension').async_comprehension
 
 
 async def measure_runtime() -> float:
-    """
-    Measures the total runtime of executing
-    async_comprehension four times in parallel.
+    """Measure the total runtime of four parallel async comprehensions.
 
-    The total runtime is roughly 10 seconds because all four calls to
-    'async_comprehension' run concurrently using 'asyncio.gather'.
-    The underlying 'async_generator' yields 10 times with a 1-second delay,
-    making the total execution time of the longest I/O operation 10 seconds.
-    The concurrent tasks share this 10-second waiting time.
+    This coroutine uses asyncio.gather to run the async_comprehension
+    coroutine four times concurrently. It measures the total elapsed
+    time for all four to complete.
+
+    The total runtime is approximately 10 seconds because the four tasks
+    run concurrently on a single event loop. The underlying 'async_generator'
+    is the bottleneck, as it sleeps for 1 second ten times (totaling 10s).
+    Since all four tasks await the same shared generator mechanism, they
+    complete at the end of the generator's total 10-second duration,
+    not the sum of their individual times (which would be ~40s).
 
     Returns:
-        float: The total time taken to execute all four instances, in seconds.
+        float: The total time taken to execute the four coroutines in seconds.
     """
-    start_time = time()
+    start = time()
     await asyncio.gather(*(async_comprehension() for _ in range(4)))
-    end_time = time()
-    return end_time - start_time
+    end = time()
+    return end - start
 
 if __name__ == '__main__':
     async def main():
