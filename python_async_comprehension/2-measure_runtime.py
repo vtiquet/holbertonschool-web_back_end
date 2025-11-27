@@ -3,7 +3,7 @@
 Run time for four parallel comprehensions
 """
 import asyncio
-import time
+from time import time
 
 # Import the async_comprehension from the previous task
 async_comprehension = __import__('1-async_comprehension').async_comprehension
@@ -11,28 +11,21 @@ async_comprehension = __import__('1-async_comprehension').async_comprehension
 
 async def measure_runtime() -> float:
     """
-    Coroutine that executes async_comprehension four times in parallel
-    and measures the total runtime.
+    Measures the total runtime of executing
+    async_comprehension four times in parallel.
 
-    The total runtime is roughly 10 seconds because:
-    1. The underlying 'async_generator' yields 10 numbers, waiting 1 second
-       between each yield (totaling 10 seconds).
-    2. All four calls to 'async_comprehension' run concurrently using
-       'asyncio.gather'.
-    3. Since they all rely on the *same* single-threaded event loop,
-       they effectively share the time of the generator. The execution time
-       is limited by the slowest, longest task (the 10-second generator),
-       not the sum of their individual times (which would be ~40 seconds).
+    The total runtime is roughly 10 seconds because all four calls to
+    'async_comprehension' run concurrently using 'asyncio.gather'.
+    The underlying 'async_generator' yields 10 times with a 1-second delay,
+    making the total execution time of the longest I/O operation 10 seconds.
+    The concurrent tasks share this 10-second waiting time.
+
+    Returns:
+        float: The total time taken to execute all four instances, in seconds.
     """
-    start_time = time.time()
-
-    # Create four tasks for async_comprehension
-    tasks = [async_comprehension() for _ in range(4)]
-
-    # Run the tasks concurrently
-    await asyncio.gather(*tasks)
-
-    end_time = time.time()
+    start_time = time()
+    await asyncio.gather(*(async_comprehension() for _ in range(4)))
+    end_time = time()
     return end_time - start_time
 
 if __name__ == '__main__':
