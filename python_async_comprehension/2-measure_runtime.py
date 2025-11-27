@@ -13,6 +13,16 @@ async def measure_runtime() -> float:
     """
     Coroutine that executes async_comprehension four times in parallel
     and measures the total runtime.
+
+    The total runtime is roughly 10 seconds because:
+    1. The underlying 'async_generator' yields 10 numbers, waiting 1 second
+       between each yield (totaling 10 seconds).
+    2. All four calls to 'async_comprehension' run concurrently using
+       'asyncio.gather'.
+    3. Since they all rely on the *same* single-threaded event loop,
+       they effectively share the time of the generator. The execution time
+       is limited by the slowest, longest task (the 10-second generator),
+       not the sum of their individual times (which would be ~40 seconds).
     """
     start_time = time.time()
 
