@@ -2,9 +2,7 @@
 
 # Holberton School - Web Back-End
 
-This repository contains all the projects completed during the **Web Back-End** curriculum at Holberton School. The focus is on mastering **Python** for server-side development, with a strong emphasis on modern concepts such as **asynchronous programming** and rigorous **type-checking**.
-
-The projects cover foundational knowledge required for building scalable, high-performance web services and APIs.
+This repository contains all the projects completed during the **Web Back-End** curriculum at Holberton School. The focus is on mastering **Python** for server-side development, with a strong emphasis on modern concepts such as **asynchronous programming** and rigorous **type-checking**. The projects cover foundational knowledge required for building scalable, high-performance web services and APIs.
 
 -----
 
@@ -14,9 +12,11 @@ The following directories represent individual modules or projects:
 
 | Directory | Topic | Description |
 | :--- | :--- | :--- |
-| **[`python_variable_annotations`](https://www.google.com/search?q=./python_variable_annotations)** | Python Type Annotations | Mastering Python's type hints (using the `typing` module) for variables, functions, and complex data structures to improve code clarity and robustness. |
-| **[`python_async_function`](https://www.google.com/search?q=./python_async_function)** | Python Asynchronous Functions | Introduction to concurrent and non-blocking code using Python's `async` and `await` syntax, including measuring execution time and managing concurrent coroutines. |
+| **[`NoSQL`](https://www.google.com/search?q=./NoSQL)** | NoSQL Databases (MongoDB) | Introduction to NoSQL databases, focusing on MongoDB. Covers basic shell commands and Python interaction (PyMongo) for CRUD operations and aggregation. |
+| **[`pagination`](https://www.google.com/search?q=./pagination)** | Pagination | Implementing various pagination strategies in Python, including simple pagination, hypermedia pagination, and deletion-resilient indexing. |
 | **[`python_async_comprehension`](https://www.google.com/search?q=./python_async_comprehension)** | Python Asynchronous Comprehension | Working with asynchronous generators and implementing list, dictionary, and set comprehensions in an asynchronous context. |
+| **[`python_async_function`](https://www.google.com/search?q=./python_async_function)** | Python Asynchronous Functions | Introduction to concurrent and non-blocking code using Python's `async` and `await` syntax, including measuring execution time and managing concurrent coroutines. |
+| **[`python_variable_annotations`](https://www.google.com/search?q=./python_variable_annotations)** | Python Type Annotations | Mastering Python's type hints (using the `typing` module) for variables, functions, and complex data structures to improve code clarity and robustness. |
 
 -----
 
