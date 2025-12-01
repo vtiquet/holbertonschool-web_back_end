@@ -3,23 +3,29 @@
 from pymongo import MongoClient
 
 
-def log_stats():
-    """
-    Prints statistics about Nginx logs in the logs database, nginx collection.
-    """
+if __name__ == "__main__":
     client = MongoClient('mongodb://127.0.0.1:27017')
-    logs_collection = client.logs.nginx
 
-    total_logs = logs_collection.count_documents({})
-    print(f"{total_logs} logs")
+    collection = client.logs.nginx
 
-    print("Methods:")
-    methods = ["GET", "POST", "PUT", "PATCH", "DELETE"]
-    for method in methods:
-        count = logs_collection.count_documents({"method": method})
-        print(f"\tmethod {method}: {count}")
+    total_logs = collection.count_documents({})
+    get_count = collection.count_documents({"method": "GET"})
+    post_count = collection.count_documents({"method": "POST"})
+    put_count = collection.count_documents({"method": "PUT"})
+    patch_count = collection.count_documents({"method": "PATCH"})
+    delete_count = collection.count_documents({"method": "DELETE"})
 
-    status_count = logs_collection.count_documents(
+    status_count = collection.count_documents(
         {"method": "GET", "path": "/status"}
         )
-    print(f"{status_count} status check")
+
+    print(
+        f"{total_logs} logs\n"
+        "Methods:\n"
+        f"\tmethod GET: {get_count}\n"
+        f"\tmethod POST: {post_count}\n"
+        f"\tmethod PUT: {put_count}\n"
+        f"\tmethod PATCH: {patch_count}\n"
+        f"\tmethod DELETE: {delete_count}\n"
+        f"{status_count} status check"
+    )
