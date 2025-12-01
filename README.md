@@ -12,11 +12,11 @@ The following directories represent individual modules or projects:
 
 | Directory | Topic | Description |
 | :--- | :--- | :--- |
-| **[`NoSQL`](https://www.google.com/search?q=./NoSQL)** | NoSQL Databases (MongoDB) | Introduction to NoSQL databases, focusing on MongoDB. Covers basic shell commands and Python interaction (PyMongo) for CRUD operations and aggregation. |
-| **[`pagination`](https://www.google.com/search?q=./pagination)** | Pagination | Implementing various pagination strategies in Python, including simple pagination, hypermedia pagination, and deletion-resilient indexing. |
-| **[`python_async_comprehension`](https://www.google.com/search?q=./python_async_comprehension)** | Python Asynchronous Comprehension | Working with asynchronous generators and implementing list, dictionary, and set comprehensions in an asynchronous context. |
-| **[`python_async_function`](https://www.google.com/search?q=./python_async_function)** | Python Asynchronous Functions | Introduction to concurrent and non-blocking code using Python's `async` and `await` syntax, including measuring execution time and managing concurrent coroutines. |
-| **[`python_variable_annotations`](https://www.google.com/search?q=./python_variable_annotations)** | Python Type Annotations | Mastering Python's type hints (using the `typing` module) for variables, functions, and complex data structures to improve code clarity and robustness. |
+| **[`NoSQL`](https://github.com/vtiquet/holbertonschool-web_back_end/tree/main/NoSQL)** | NoSQL Databases (MongoDB) | Introduction to NoSQL databases, focusing on MongoDB. Covers basic shell commands and Python interaction (PyMongo) for CRUD operations and aggregation. |
+| **[`pagination`](https://github.com/vtiquet/holbertonschool-web_back_end/tree/main/pagination)** | Pagination | Implementing various pagination strategies in Python, including simple pagination, hypermedia pagination, and deletion-resilient indexing. |
+| **[`python_async_comprehension`](https://github.com/vtiquet/holbertonschool-web_back_end/tree/main/python_async_comprehension)** | Python Asynchronous Comprehension | Working with asynchronous generators and implementing list, dictionary, and set comprehensions in an asynchronous context. |
+| **[`python_async_function`](https://github.com/vtiquet/holbertonschool-web_back_end/tree/main/python_async_function)** | Python Asynchronous Functions | Introduction to concurrent and non-blocking code using Python's `async` and `await` syntax, including measuring execution time and managing concurrent coroutines. |
+| **[`python_variable_annotations`](https://github.com/vtiquet/holbertonschool-web_back_end/tree/main/python_variable_annotations)** | Python Type Annotations | Mastering Python's type hints (using the `typing` module) for variables, functions, and complex data structures to improve code clarity and robustness. |
 
 -----
 
