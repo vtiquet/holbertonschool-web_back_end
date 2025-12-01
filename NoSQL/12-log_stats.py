@@ -7,7 +7,7 @@ def log_stats():
     """
     Prints statistics about Nginx logs in the logs database, nginx collection.
     """
-    client = MongoClient(mongodb://127.0.0.1:27017)
+    client = MongoClient('mongodb://127.0.0.1:27017')
     logs_collection = client.logs.nginx
 
     total_logs = logs_collection.count_documents({})
@@ -19,5 +19,7 @@ def log_stats():
         count = logs_collection.count_documents({"method": method})
         print(f"\tmethod {method}: {count}")
 
-    status_count = logs_collection.count_documents({"method": "GET", "path": "/status"})
+    status_count = logs_collection.count_documents(
+        {"method": "GET", "path": "/status"}
+        )
     print(f"{status_count} status check")
