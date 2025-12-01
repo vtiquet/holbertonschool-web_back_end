@@ -1,37 +1,51 @@
 #!/usr/bin/env python3
-""" Provides some stats about Nginx logs, including the top 10 IPs """
+"""
+Module to display statistics about Nginx logs stored in MongoDB.
+
+This script connects to the 'logs' database and the 'nginx' collection,
+and prints the following statistics:
+
+- Total number of log documents in the collection
+- Number of requests per HTTP method (GET, POST, PUT, PATCH, DELETE)
+- Number of GET requests to the /status endpoint
+- Top 10 most frequent IPs with their occurrence counts
+"""
 from pymongo import MongoClient
 
 
-def log_stats():
-    """
-    Prints statistics about Nginx logs and the top 10 IPs.
-    """
-    client = MongoClient(mongodb://127.0.0.1:27017)
-    logs_collection = client.logs.nginx
+if __name__ == "__main__":
+    client = MongoClient('mongodb://127.0.0.1:27017')
 
-    total_logs = logs_collection.count_documents({})
-    print(f"{total_logs} logs")
+    collection = client.logs.nginx
 
-    print("Methods:")
-    methods = ["GET", "POST", "PUT", "PATCH", "DELETE"]
-    for method in methods:
-        count = logs_collection.count_documents({"method": method})
-        print(f"\tmethod {method}: {count}")
+    total_logs = collection.count_documents({})
+    get_count = collection.count_documents({"method": "GET"})
+    post_count = collection.count_documents({"method": "POST"})
+    put_count = collection.count_documents({"method": "PUT"})
+    patch_count = collection.count_documents({"method": "PATCH"})
+    delete_count = collection.count_documents({"method": "DELETE"})
+    status_count = collection.count_documents({"method": "GET", "path": "/status"})
 
-    status_count = logs_collection.count_documents(
-        {"method": "GET", "path": "/status"}
-        )
-    print(f"{status_count} status check")
+    print(
+        f"{total_logs} logs\n"
+        "Methods:\n"
+        f"\tmethod GET: {get_count}\n"
+        f"\tmethod POST: {post_count}\n"
+        f"\tmethod PUT: {put_count}\n"
+        f"\tmethod PATCH: {patch_count}\n"
+        f"\tmethod DELETE: {delete_count}\n"
+        f"{status_count} status check"
+    )
 
-    # Top 10 IPs
     print("IPs:")
+
     ip_pipeline = [
         {"$group": {"_id": "$ip", "count": {"$sum": 1}}},
         {"$sort": {"count": -1}},
         {"$limit": 10}
     ]
-    top_ips = list(logs_collection.aggregate(ip_pipeline))
+    
+    top_ips = collection.aggregate(ip_pipeline)
 
-    for ip_data in top_ips:
-        print(f"\t{ip_data.get(_id)}: {ip_data.get(count)}")
+    for ip in top_ips:
+        print(f"\t{ip['_id']}: {ip['count']}")
