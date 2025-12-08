@@ -10,7 +10,7 @@ export default class Car {
   }
 
   set brand(newBrand) {
-    if (typeof newBrand !== 'string') {
+    if (newBrand !== undefined && typeof newBrand !== 'string') {
       throw new TypeError('Brand must be a string');
     }
     this._brand = newBrand;
@@ -21,7 +21,7 @@ export default class Car {
   }
 
   set motor(newMotor) {
-    if (typeof newMotor !== 'string') {
+    if (newMotor !== undefined && typeof newMotor !== 'string') {
       throw new TypeError('Motor must be a string');
     }
     this._motor = newMotor;
@@ -32,7 +32,7 @@ export default class Car {
   }
 
   set color(newColor) {
-    if (typeof newColor !== 'string') {
+    if (newColor !== undefined && typeof newColor !== 'string') {
       throw new TypeError('Color must be a string');
     }
     this._color = newColor;
