@@ -7,10 +7,9 @@ async function countStudents(path) {
         reject(new Error('Cannot load the database'));
         return;
       }
-      const lines = data.split('\n').filter((line) => line.trim() !== '');
+      const lines = data.trim().split('\n').filter((line) => line !== '');
       const students = lines.slice(1);
-
-      let output = `Number of students: ${students.length}\n`;
+      let response = `Number of students: ${students.length}\n`;
       const fields = {};
 
       students.forEach((line) => {
@@ -19,14 +18,14 @@ async function countStudents(path) {
         fields[field].push(firstname);
       });
 
-      const fieldKeys = Object.keys(fields);
-      fieldKeys.forEach((field, index) => {
-        output += `Number of students in ${field}: ${fields[field].length}. List: ${fields[field].join(', ')}`;
-        if (index < fieldKeys.length - 1) output += '\n';
+      const fieldEntries = Object.entries(fields);
+      fieldEntries.forEach(([field, names], index) => {
+        response += `Number of students in ${field}: ${names.length}. List: ${names.join(', ')}`;
+        if (index < fieldEntries.length - 1) response += '\n';
       });
 
-      console.log(output);
-      resolve(output);
+      console.log(response);
+      resolve(response);
     });
   });
 }
