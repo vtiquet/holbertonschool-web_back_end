@@ -1,13 +1,18 @@
-import { readDatabase } from '../utils';
+import readDatabase from '../utils';
 
 export default class StudentsController {
   static getAllStudents(request, response) {
     readDatabase(process.argv[2])
       .then((fields) => {
         let output = 'This is the list of our students';
-        const sortedFields = Object.keys(fields).sort((a, b) => a.toLowerCase().localeCompare(b.toLowerCase()));
+        const sortedFields = Object.keys(fields).sort((a, b) => (
+          a.toLowerCase().localeCompare(b.toLowerCase())
+        ));
+
         sortedFields.forEach((field) => {
-          output += `\nNumber of students in ${field}: ${fields[field].length}. List: ${fields[field].join(', ')}`;
+          const count = fields[field].length;
+          const list = fields[field].join(', ');
+          output += `\nNumber of students in ${field}: ${count}. List: ${list}`;
         });
         response.status(200).send(output);
       })
